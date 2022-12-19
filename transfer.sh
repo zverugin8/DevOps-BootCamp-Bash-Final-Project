@@ -44,7 +44,7 @@ args_upload() {
 }
 single_download() {
   echo "Downloading $4"
-  res=$(curl -# --write-out "%{http_code}\n" https://transfer.sh/"$3"/"$4" -o "$2")
+  res=$(curl --create-dirs -# --write-out "%{http_code}\n" https://transfer.sh/"$3"/"$4" -o "$2/$4")
   if [[ "res" -ne 200 ]] ; then
   echo "Download error $res"
   return 1
