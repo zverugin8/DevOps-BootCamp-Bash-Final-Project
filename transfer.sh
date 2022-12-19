@@ -1,10 +1,10 @@
 #!/bin/bash
-# https://stackoverflow.com/questions/2220301/how-to-evaluate-http-response-codes-from-bash-shell-script
+# 
 CURRENT_VERSOIN="1.23.0"
 
 
 httpSingleUpload() {
-  #response=$(curl -A curl --upload-file "$1" "https://transfer.sh/$2") || { echo "Failure!"; return 1;}
+  
   echo "Uploading $1"
     response=$(curl -A curl -# --upload-file "$1" "https://transfer.sh/$2") || {
     echo "Failure!"
@@ -14,23 +14,7 @@ httpSingleUpload() {
 
 }
 
-# printUploadResponse() {
-#   fileID=$(echo "$response" | cut -d "/" -f 4)
-#   cat <<EOF
-# Transfer File URL: $response
-# EOF
-# }
 
-# singleUpload() {
-#   filePath=$(echo "$1" | sed s:"~":"$HOME":g)
-#   if ! -f "$filePath"; then {
-#     echo "Error: invalid file path"
-#     return 1
-#   }; fi
-#   tempFileName=$(echo "$1" | sed "s/.*\///")
-#   echo "Uploading $tempFileName"
-#   httpSingleUpload "$filePath $tempFileName"
-# }
 args_upload() {
   for file in "$@"; do
     #dir_name=$(dirname $file)
@@ -52,8 +36,7 @@ single_download() {
   fi
 
 }
-#singleUpload "$1" || exit 1
-#printUploadResponse
+
 if [ $# -eq 0 ]; then
   printf "No arguments specified.\nUsage:\ntransfer file1 file1 ... fileN \ntransfer file_name\n"
   exit 1
@@ -68,10 +51,10 @@ case "${1}" in
     IFS='' read -r -d '' hlp_msg <<'EOF'
     Description: Bash tool to transfer files from the command line.
     Usage:
-      -d  ...
-      -h  Show the help ... 
+      -d  dounload path remote_folder local_file_name
+      -h  Show this help 
       -v  Get the tool version
-      <file1> <file1> ... <fileN> transfer files <file1> <file1> ... <fileN>
+      <file1> <file1> ... <fileN> transfer files <file1> <file1> ... <fileN> to remote sever
     Examples:
     ./transfer.sh <file1> <file1> ... <fileN>
     ./transfer.sh -d ./test Mij6ca test.txt
